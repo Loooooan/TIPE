@@ -1,5 +1,6 @@
 import numpy as np  # Bibliothèque utilisée pour le calcul
 import pylab as pl  # Bibliothèque utilisée pour les affichages
+import math
 
 # Bibliothèque pour résoudre les
 # équations différentielles ordinaires (EDO)
@@ -60,11 +61,36 @@ x_pas1[0, 0] = x0
 for i in range(len(t_pas1) - 1):
     x_pas1[i + 1, :] = x_pas1[i, :] + pl.dot(dx(x_pas1[i, :], t_pas1[i]), t_pas1[i + 1] - t_pas1[i])
 
-pl.plot(t_pas1, x_pas1[:, 1], label="Déplacement du bâtiment")
-pl.plot(t_pas1, x_pas1[:, 2], label="Déplacement de l'amortisseur")
+pl.plot(t_pas1, x_pas1[:, 1], label="Déplacement de l'amortisseur")
+pl.plot(t_pas1, x_pas1[:, 2], label="Déplacement de la tour avec amortisseur")
+
+#EULER SANS AMO
+
+def euler(x0, u0, Te, tmax, Xi, w0):
+    X = [x0]
+    U = [u0]
+    T = [Te]
+    t = 0
+    i = 1
+    while t < tmax:
+        t += Te
+        U.append(U[i-1] + Te*(-2*Xi*w0*U[i-1] - (w0**2)*X[i-1]))
+        X.append(X[i-1] + Te*U[i-1])
+        T.append(t)
+        i += 1
+    return X, U, T
+
+f = 52000
+tmax = 240
+Te = 0.6*10**(-3)
+
+w0 = math.sqrt(k1/m1)
+Xi = (1/2)*f/(math.sqrt(k1*m1))
+
+L = euler(x0, 0, Te, tmax, Xi, w0)
+
+pl.plot(L[2], L[0], label="Déplacement de la tour sans amortisseur")
+
 pl.legend()
-
 pl.show()
-
-
 
