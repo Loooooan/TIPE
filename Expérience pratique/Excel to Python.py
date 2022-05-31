@@ -33,9 +33,10 @@ plt.ylabel("Position (m)") #Vérifier l'unité et être sûr que c'est bien des 
 plt.show()
 
 #Format du .txt:
-#0;1;2   #Première ligne c'est les valeurs de temps, chaque fois séparé par un ;
-#2;3;4   #Deuxième ligne = sans TMD
-#2;4;5   #Troisième ligne = avec TMD
+#0;1;2   #Premiere nomnbre = instant t, deuxieme = position sans TMD à l'instant t, troisième = position avec TMD à l'instant t
+#2;3;4   
+#3;4;5   
+#...
 
 #Fais attention à part faire un saut de ligne après la troisième ligne, sinon ça va buguer
 #Le fichier .txt doit être dans le même dossier que le .py et être renommé "donne.txt"
