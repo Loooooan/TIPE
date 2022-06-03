@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 a = 0.1
-n = 0.3
+n = 0
 b = 1/m.sqrt(1+a)
 
 def G2(z, n):
@@ -15,14 +15,21 @@ def G2(z, n):
 
 z = np.linspace(0, 1.4, 1000)
 
-valeurs_n1 = [0.1, 0.3, 0.6] #Compléter ici les valeurs à tester
+valeurs_n1 = [0.18, 0.19, 0.21] #Compléter ici les valeurs à tester
+legende = []
+
+plt.xlim([0.85, 1.2])
+plt.ylim([3.6, 4.8])
 
 for n1 in valeurs_n1:
+    legende.append("η=" + str(n1))
     G_2 = []
     for elt in z:
         G_2.append(G2(elt, n1))
     plt.plot(z, G_2)
 
-plt.legend((valeurs_n1))
+plt.legend(legende)
+plt.ylabel("G2")
+plt.xlabel("z")
 
 plt.show()
